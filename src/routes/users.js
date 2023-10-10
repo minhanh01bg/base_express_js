@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-
+const user_controller = require('../controllers/users');
 
 /**
  * @swagger
@@ -26,8 +26,7 @@ const user = [
 ]
 
 router.get('/', (req,res) =>{
-  console.log(user)
-  res.status(200).send('users');
+  user_controller.getUsers(req,res);
 })
 
 router.get('/all', (req,res) => {
@@ -40,7 +39,13 @@ router.get('/:id', (req,res) => {
 })
 
 router.post('/', (req,res) => {
-  res.status(200).send("user created");
+  console.log(req.body);
+  user_controller.create(req,res);
+})
+
+router.post('/login', (req,res) => {
+  console.log(req.body);
+  user_controller.login(req,res);
 })
 
 router.put('/:id', (req,res) => {
